@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHS-004 · Seminários Avançados em Ciências Humanas e Sociais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3ede1;--paper-deep:#e9e0cf;--paper-card:#f7f1e4;
+    --ink:#20190f;--ink-soft:#4a3f30;--ink-faint:#7d6e57;
+    --oxblood:#7c2d2a;--oxblood-soft:#9c463c;--ochre:#b5732a;
+    --green:#274b3a;--green-soft:#3a6450;
+    --rule:rgba(32,25,15,.15);--rule-soft:rgba(32,25,15,.08);--shadow:rgba(32,25,15,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Newsreader',Georgia,serif;background-color:var(--paper);
+    background-image:
+      radial-gradient(circle at 15% 12%, rgba(181,115,42,.07), transparent 45%),
+      radial-gradient(circle at 85% 8%, rgba(124,45,42,.06), transparent 40%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    color:var(--ink);line-height:1.62;font-size:18px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px;}
+  header.hero{padding:42px 0 46px;border-bottom:2.5px solid var(--ink);position:relative;}
+  .brandbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:40px;}
+  .brandbar img{height:40px;width:auto;opacity:.9;}
+  .brandbar .prog{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);text-align:right;line-height:1.7;}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--oxblood);font-weight:500;display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .kicker::after{content:"";flex:1;height:1px;background:var(--rule);}
+  h1.title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(2.6rem,6.5vw,4.6rem);line-height:.98;letter-spacing:-.018em;color:var(--ink);}
+  h1.title em{font-style:italic;font-weight:400;color:var(--oxblood);}
+  .subtitle{font-family:'Newsreader',serif;font-style:italic;font-size:clamp(1.05rem,2.4vw,1.5rem);color:var(--ink-soft);margin-top:22px;max-width:30ch;font-weight:300;}
+  .meta{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule);border-radius:3px;margin-top:42px;overflow:hidden;background:var(--paper-card);}
+  .meta div{padding:18px 20px;border-right:1px solid var(--rule-soft);}
+  .meta div:last-child{border-right:none;}
+  .meta dt{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:7px;}
+  .meta dd{font-family:'Fraunces',serif;font-size:1.12rem;font-weight:500;color:var(--ink);line-height:1.2;}
+  .meta dd small{display:block;font-family:'Newsreader',serif;font-size:.82rem;font-weight:400;color:var(--ink-soft);margin-top:3px;font-style:italic;}
+
+  section{padding:56px 0;border-bottom:1px solid var(--rule);}
+  .sec-label{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--oxblood);margin-bottom:18px;font-weight:500;}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.7rem,3.6vw,2.5rem);letter-spacing:-.01em;line-height:1.05;margin-bottom:24px;}
+  p.lead{font-size:1.16rem;color:var(--ink-soft);max-width:64ch;text-align:justify;hyphens:auto;}
+  p.lead + p.lead{margin-top:16px;}
+  .dropcap::first-letter{font-family:'Fraunces',serif;font-weight:600;font-size:3.6rem;float:left;line-height:.78;padding:6px 10px 0 0;color:var(--oxblood);}
+  .tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px;}
+  .tags span{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.04em;border:1px solid var(--rule);padding:6px 13px;border-radius:40px;color:var(--ink-soft);background:var(--paper-card);}
+
+  .eval-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px;}
+  .eval-card{background:var(--paper-card);border:1px solid var(--rule);border-top:3px solid var(--oxblood);border-radius:3px;padding:24px 22px;}
+  .eval-card .num{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:var(--ochre);}
+  .eval-card h3{font-family:'Fraunces',serif;font-size:1.22rem;font-weight:600;margin:8px 0 9px;}
+  .eval-card p{font-size:.96rem;color:var(--ink-soft);}
+
+  /* PONTO DE PARTIDA — leve e arejado */
+  .partida{position:relative;margin-top:36px;border-radius:8px;
+    background:#edf0e4;border:1px solid rgba(39,75,58,.2);border-left:4px solid var(--green-soft);
+    padding:52px 56px;}
+  .partida .pp-label{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--green-soft);margin-bottom:24px;font-weight:500;}
+  .partida blockquote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(1.4rem,3.1vw,2rem);line-height:1.42;color:var(--green);max-width:34ch;}
+  .partida .pp-note{font-family:'Newsreader',serif;font-style:italic;font-size:1.02rem;color:var(--ink-soft);margin-top:24px;max-width:52ch;}
+  .partida .pp-specs{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.05em;color:var(--ink-faint);margin-top:34px;padding-top:22px;border-top:1px solid rgba(39,75,58,.16);line-height:1.9;}
+  .partida .pp-specs b{color:var(--green);font-weight:600;}
+
+  .arc{display:flex;flex-direction:column;margin-top:20px;}
+  .arc-item{display:grid;grid-template-columns:54px 1fr;gap:22px;padding:20px 0;border-bottom:1px solid var(--rule-soft);align-items:baseline;}
+  .arc-item:last-child{border-bottom:none;}
+  .arc-num{font-family:'Fraunces',serif;font-style:italic;font-size:1.7rem;color:var(--oxblood);font-weight:500;}
+  .arc-item h3{font-family:'Fraunces',serif;font-size:1.22rem;font-weight:600;margin-bottom:5px;}
+  .arc-item p{font-size:.96rem;color:var(--ink-soft);}
+  .arc-item strong{color:var(--oxblood);}
+
+  /* DIVISAO */
+  .format-note{display:flex;flex-wrap:wrap;gap:14px;margin:6px 0 18px;}
+  .format-note .fn{background:var(--paper-card);border:1px solid var(--rule);border-radius:4px;padding:16px 20px;flex:1;min-width:150px;}
+  .format-note .fn b{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:600;color:var(--green);display:block;line-height:1;}
+  .format-note .fn.done b{color:var(--oxblood);}
+  .format-note .fn span{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);}
+  .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:2px 0 24px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-faint);letter-spacing:.04em;}
+  .toolbar button{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;background:var(--paper-card);border:1px solid var(--rule);color:var(--ink-soft);padding:8px 14px;border-radius:40px;cursor:pointer;transition:all .25s;}
+  .toolbar button:hover{border-color:var(--oxblood);color:var(--oxblood);}
+  .toolbar .save{color:var(--green-soft);}
+  .roster-label{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px;}
+  .roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;}
+  .roster .name{background:var(--paper-card);border:1px solid var(--rule);border-radius:4px;padding:11px 16px;font-size:.95rem;display:flex;align-items:center;gap:10px;}
+  .roster .name i{font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:.7rem;color:var(--ochre);min-width:18px;}
+  .roster .name.self{border-color:var(--oxblood);background:rgba(124,45,42,.06);}
+  .alert{margin-top:24px;padding:18px 22px;border-left:3px solid var(--ochre);background:rgba(181,115,42,.08);border-radius:0 4px 4px 0;font-size:.98rem;color:var(--ink-soft);text-align:justify;}
+  .alert strong{color:var(--ink);font-weight:600;}
+
+  .session{position:relative;background:var(--paper-card);border:1px solid var(--rule);border-radius:4px;padding:30px 32px 26px;margin-bottom:18px;box-shadow:0 1px 0 var(--shadow);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s;}
+  .session:hover{transform:translateY(-3px);box-shadow:0 14px 30px -16px var(--shadow);border-color:var(--oxblood-soft);}
+  .session.opening{background:linear-gradient(180deg,rgba(124,45,42,.06),var(--paper-card));}
+  .session.filled{border-left:3px solid var(--green-soft);}
+  .s-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px;}
+  .s-index{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;color:var(--oxblood);letter-spacing:.02em;}
+  .s-date{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.06em;color:var(--ink-faint);background:var(--paper-deep);padding:3px 10px;border-radius:3px;}
+  .s-today{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--oxblood);padding:3px 9px;border-radius:3px;font-weight:500;}
+  .s-bloco{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre);margin-left:auto;}
+  .s-theme{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;line-height:1.1;letter-spacing:-.01em;margin:8px 0 16px;}
+  .readings{list-style:none;display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--rule-soft);padding-top:16px;}
+  .readings li{font-size:.98rem;line-height:1.5;color:var(--ink-soft);padding-left:20px;position:relative;text-align:justify;hyphens:auto;}
+  .readings li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border:1.5px solid var(--oxblood-soft);border-radius:50%;}
+  .readings li .au{font-family:'Fraunces',serif;font-weight:600;color:var(--ink);font-variant:small-caps;letter-spacing:.02em;}
+  .readings li .ti{font-style:italic;}
+  .readings li.support{font-size:.88rem;color:var(--ink-faint);}
+  .readings li.support::before{background:none;border-style:dotted;}
+  .readings li.support .lbl{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);}
+  .no-reading{font-style:italic;color:var(--ink-faint);font-size:.96rem;border-top:1px solid var(--rule-soft);padding-top:16px;}
+
+  /* EDITABLE ASSIGN BLOCK */
+  .assign{margin-top:16px;padding-top:14px;border-top:1px dashed var(--rule);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .assign .albl{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);white-space:nowrap;}
+  .assign select.atype{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.04em;background:var(--paper-deep);border:1px solid var(--rule);color:var(--ink-soft);padding:6px 9px;border-radius:4px;cursor:pointer;}
+  .assign input.aslot{flex:1;min-width:200px;border:none;border-bottom:1.5px dashed var(--ink-faint);background:transparent;font-family:'Newsreader',serif;font-size:1rem;color:var(--ink);padding:5px 2px;transition:border-color .25s;}
+  .assign input.aslot::placeholder{color:var(--ink-faint);font-style:italic;}
+  .assign input.aslot:focus{outline:none;border-bottom-color:var(--green-soft);border-bottom-style:solid;}
+  .assign input.aslot:not(:placeholder-shown){border-bottom-color:var(--green-soft);font-weight:500;}
+
+  footer{padding:54px 0 70px;text-align:center;}
+  footer .mark{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--oxblood);}
+  footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:var(--ink-faint);margin-top:12px;line-height:1.7;}
+  footer .corr{max-width:62ch;margin:26px auto 0;text-align:left;font-family:'Newsreader',serif;font-size:.86rem;color:var(--ink-faint);background:var(--paper-card);border:1px dashed var(--rule);border-radius:3px;padding:18px 22px;}
+  footer .corr strong{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:8px;}
+
+  .reveal{opacity:0;transform:translateY(18px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+
+  @media(max-width:680px){
+    body{font-size:17px;}
+    .brandbar img{height:32px;}
+    .meta{grid-template-columns:repeat(2,1fr);}
+    .meta div:nth-child(2){border-right:none;}
+    .eval-grid{grid-template-columns:1fr;}
+    .partida{padding:32px 24px;}
+    .session{padding:24px 22px;}
+    .s-bloco{margin-left:0;width:100%;}
+    .arc-item{grid-template-columns:40px 1fr;gap:14px;}
+    .assign input.aslot{min-width:140px;}
+  }
+  @media print{
+    body{background:#fff;font-size:11pt;}
+    .session,.eval-card,.meta,.partida{box-shadow:none;break-inside:avoid;}
+    .session:hover{transform:none;}
+    section{padding:24px 0;}
+    .reveal{opacity:1;transform:none;animation:none;}
+    .toolbar{display:none;}
+    .assign input.aslot{border-bottom:1px solid #999;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero reveal" style="animation-delay:.05s">
+    <div class="brandbar">
+      <img src="data:image/png;base64,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" alt="Universidade Federal do ABC">
+      <div class="prog">Pós-Graduação em<br>Ciências Humanas e Sociais</div>
+    </div>
+    <div class="kicker">2026.2 · CHS-004 · TCHS00420262</div>
+    <h1 class="title">Seminários Avançados<br>em <em>Ciências Humanas<br>e Sociais</em></h1>
+    <p class="subtitle">Teoria social contemporânea, a questão do método e os caminhos da interdisciplinaridade</p>
+    <dl class="meta">
+      <div><dt>Docente</dt><dd>Paulo Sergio<br>da Costa Neves<small>CECS · paulo.neves@ufabc.edu.br</small></dd></div>
+      <div><dt>Encontros</dt><dd>Terças-feiras<small>26/05 a 18/08 de 2026</small></dd></div>
+      <div><dt>Carga</dt><dd>48 horas-aula<small>12 encontros</small></dd></div>
+      <div><dt>Turma</dt><dd>14 discentes<small>Início: 26/05</small></dd></div>
+    </dl>
+  </header>
+
+  <section class="reveal" style="animation-delay:.12s">
+    <div class="sec-label">01 — Ementa</div>
+    <h2>Do saber disciplinado ao saber em trânsito</h2>
+    <p class="lead dropcap">A disciplina forma o saber tanto quanto o ordena: o método funciona como gramática do discurso científico e como fronteira do que pode ou não ser dito como conhecimento. O curso parte do esgotamento dessa abordagem disciplinar para examinar a emergência da interdisciplinaridade como questão simultaneamente teórica e prática, com seus deslocamentos epistêmicos e seus impasses.</p>
+    <p class="lead">Trata-se de percorrer a interdisciplinaridade nas chaves histórica, sociológica e antropológica, disputando categorias vizinhas (pluri, multi, inter e transdisciplinaridade) e observando as resistências e confrontos institucionais que se erguem quando universidades, periódicos, agências de fomento e sistemas de avaliação são confrontados com a revisão de seus próprios parâmetros disciplinares.</p>
+    <div class="tags"><span>Método e discurso científico</span><span>Interdisciplinaridade</span><span>Transversalidade</span><span>Crítica ao moderno</span><span>Giro decolonial</span><span>Gênero · raça · epistemologia</span></div>
+  </section>
+
+  <section class="reveal" style="animation-delay:.16s">
+    <div class="sec-label">02 — Avaliação</div>
+    <h2>Três frentes de avaliação</h2>
+    <div class="eval-grid">
+      <div class="eval-card"><span class="num">A · 01</span><h3>Seminário</h3><p>Apresentação de um dos textos do programa, conduzindo a discussão do encontro.</p></div>
+      <div class="eval-card"><span class="num">A · 02</span><h3>Participação</h3><p>Engajamento contínuo nas discussões em sala, sessão a sessão.</p></div>
+      <div class="eval-card"><span class="num">A · 03</span><h3>Artigo / ensaio</h3><p>Texto em formato de artigo articulando interdisciplinaridade e a própria pesquisa.</p></div>
+    </div>
+    <div class="partida">
+      <div class="pp-label">Ponto de partida · o ensaio</div>
+      <blockquote>Qual a importância da pesquisa interdisciplinar em Ciências Humanas e Sociais e como isso impacta a minha pesquisa de doutorado ou mestrado?</blockquote>
+      <p class="pp-note">Não é para responder ao pé da letra: é o pretexto para pensar a interdisciplinaridade dentro da própria tese ou dissertação.</p>
+      <p class="pp-specs">Formato de artigo &nbsp;·&nbsp; <b>2 referências</b> do programa &nbsp;·&nbsp; <b>15 a 20 páginas</b></p>
+    </div>
+  </section>
+
+  <section class="reveal" style="animation-delay:.2s">
+    <div class="sec-label">03 — O arco do curso</div>
+    <h2>Cinco blocos temáticos</h2>
+    <p class="lead">O programa desenha uma trajetória que parte da fabricação social da ciência e chega às epistemologias insurgentes. Os encontros foram reagrupados em cinco blocos para orientar a escolha dos seminários por afinidade de pesquisa.</p>
+    <div class="arc">
+      <div class="arc-item"><div class="arc-num">I</div><div><h3>O campo científico e a questão do método</h3><p>A ciência como prática social situada e o método como ordenador do discurso. <strong>Bourdieu.</strong></p></div></div>
+      <div class="arc-item"><div class="arc-num">II</div><div><h3>Para além da disciplina: transversalidade e interdisciplinaridade</h3><p>Regimes de produção do conhecimento e práticas que atravessam fronteiras disciplinares. <strong>Shinn · Pombo.</strong></p></div></div>
+      <div class="arc-item"><div class="arc-num">III</div><div><h3>Crítica epistemológica ao projeto moderno</h3><p>Saberes localizados, complexidade e a desnaturalização da grande divisão moderna. <strong>Haraway · Morin · Latour.</strong></p></div></div>
+      <div class="arc-item"><div class="arc-num">IV</div><div><h3>Giro decolonial e epistemologias do Sul</h3><p>Colonialidade do saber, pensamento abissal e amefricanidade como contraponto ao eurocentrismo. <strong>Lander · Quijano · Santos · Gonzalez.</strong></p></div></div>
+      <div class="arc-item"><div class="arc-num">V</div><div><h3>Gênero, raça e epistemologias insurgentes</h3><p>Crítica feminista à ciência, interseccionalidade, racismo, colonialismo e feminismo africano. <strong>Butler · Crenshaw · Fanon · Mbembe · Oyěwùmí.</strong></p></div></div>
+    </div>
+  </section>
+
+  <section class="reveal" style="animation-delay:.22s">
+    <div class="sec-label">04 — Divisão dos seminários</div>
+    <h2>Quem apresenta o quê</h2>
+    <p class="lead">A turma se organiza em <strong>5 duplas</strong> e <strong>4 apresentações individuais</strong>, totalizando <strong>9 seminários</strong>. Use o seletor e o campo de cada encontro no cronograma para registrar os nomes; o resumo abaixo se atualiza sozinho.</p>
+    <div class="format-note">
+      <div class="fn"><b>14</b><span>discentes</span></div>
+      <div class="fn" id="fn-duplas"><b><span id="c-duplas">0</span>/5</b><span>duplas</span></div>
+      <div class="fn" id="fn-indiv"><b><span id="c-indiv">0</span>/4</b><span>individuais</span></div>
+      <div class="fn" id="fn-total"><b><span id="c-total">0</span>/9</b><span>seminários definidos</span></div>
+    </div>
+    <div class="toolbar">
+      <span class="save" id="save-status">As alterações salvam neste navegador.</span>
+      <button type="button" onclick="window.print()">Imprimir / PDF</button>
+      <button type="button" id="btn-clear">Limpar tudo</button>
+    </div>
+    <div class="roster-label">Turma · CHS-004 · 2026.2</div>
+    <div class="roster">
+      <div class="name"><i>01</i> Adriana Padua Borghi</div>
+      <div class="name"><i>02</i> Almir dos Santos</div>
+      <div class="name self"><i>03</i> Bruna dos Santos Gonçalves</div>
+      <div class="name"><i>04</i> Cláudia Cruz Soares</div>
+      <div class="name"><i>05</i> Débora Pereira de Almeida</div>
+      <div class="name"><i>06</i> Fabrícia Gomes da Silva</div>
+      <div class="name"><i>07</i> Felipe Augusto da Silva</div>
+      <div class="name"><i>08</i> Fernanda Darcie Cambaúva</div>
+      <div class="name"><i>09</i> Gisele Mascarelli Salgado</div>
+      <div class="name"><i>10</i> Ileana Alea Castillo</div>
+      <div class="name"><i>11</i> Jaqueline Galdino da Silva</div>
+      <div class="name"><i>12</i> Paulo Vitor Martins Albuquerque</div>
+      <div class="name"><i>13</i> Pedro Mendonça Castelo Branco</div>
+      <div class="name"><i>14</i> Simone Vicente Correia de Oliveira</div>
+    </div>
+    <div class="alert">
+      <strong>A definir em sala.</strong> São 11 encontros temáticos para 9 seminários: combinar com o Prof. Paulo quais encontros recebem apresentação discente e quais ele conduz, ou se algum encontro de bibliografia mais densa é trabalhado em dupla. Marquei com "dupla?" os candidatos naturais (decolonial, gênero, feminismo negro, racismo); o seletor de cada encontro permite confirmar ou mudar.
+    </div>
+  </section>
+
+  <section class="reveal" style="animation-delay:.26s">
+    <div class="sec-label">05 — Cronograma e bibliografia</div>
+    <h2>Encontro a encontro</h2>
+
+    <article class="session opening">
+      <div class="s-head"><span class="s-index">Abertura</span><span class="s-date">26.05.2026</span><span class="s-today">aula de hoje</span><span class="s-bloco">Bloco 0</span></div>
+      <h3 class="s-theme">Apresentação do curso e discussão epistemológica sobre a ciência</h3>
+      <p class="no-reading">Apresentação do plano, divisão dos seminários e debate inicial sobre os modos de fazer ciência. Sem leitura prévia obrigatória.</p>
+    </article>
+
+    <article class="session" data-id="s01">
+      <div class="s-head"><span class="s-index">01</span><span class="s-date">02.06.2026</span><span class="s-bloco">Bloco I</span></div>
+      <h3 class="s-theme">Pierre Bourdieu e o campo científico</h3>
+      <ul class="readings"><li><span class="au">Bourdieu, Pierre.</span> <span class="ti">Os usos sociais da ciência: por uma sociologia clínica do campo científico.</span> São Paulo: Editora UNESP, 2004. p. 17-48.</li></ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup">Dupla</option></select><input class="aslot" type="text" placeholder="nome(s) de quem apresenta"></div>
+    </article>
+
+    <article class="session" data-id="s02">
+      <div class="s-head"><span class="s-index">02</span><span class="s-date">09.06.2026</span><span class="s-bloco">Bloco II</span></div>
+      <h3 class="s-theme">Uma visão transversalista de ciência</h3>
+      <ul class="readings"><li><span class="au">Shinn, Terry.</span> Regimes de produção e difusão de ciência: rumo a uma organização transversal do conhecimento. <span class="ti">Scientiæ Studia,</span> São Paulo, v. 6, n. 1, p. 11-42, 2008.</li></ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup">Dupla</option></select><input class="aslot" type="text" placeholder="nome(s) de quem apresenta"></div>
+    </article>
+
+    <article class="session" data-id="s03">
+      <div class="s-head"><span class="s-index">03</span><span class="s-date">16.06.2026</span><span class="s-bloco">Bloco II</span></div>
+      <h3 class="s-theme">Ciência e interdisciplinaridade</h3>
+      <ul class="readings"><li><span class="au">Pombo, Olga.</span> Práticas interdisciplinares. <span class="ti">Sociologias,</span> Porto Alegre, ano 8, n. 15, p. 208-249, jan./jun. 2006.</li></ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup">Dupla</option></select><input class="aslot" type="text" placeholder="nome(s) de quem apresenta"></div>
+    </article>
+
+    <article class="session" data-id="s04">
+      <div class="s-head"><span class="s-index">04</span><span class="s-date">23.06.2026</span><span class="s-bloco">Bloco III</span></div>
+      <h3 class="s-theme">Saberes localizados e ciência</h3>
+      <ul class="readings">
+        <li><span class="au">Haraway, Donna.</span> Saberes localizados: a questão da ciência para o feminismo e o privilégio da perspectiva parcial. <span class="ti">Cadernos Pagu,</span> Campinas, n. 5, p. 07-41, 1995.</li>
+        <li class="support"><span class="lbl">Apoio</span> &nbsp;<span class="au">Soares, Maria Helena Silva.</span> Donna Haraway e a implosão do projeto moderno de ciência. <span class="ti">Revista Estudos Feministas,</span> v. 32, n. 2, 2024. + entrevistas com Haraway (Weigel; Goldman).</li>
+      </ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup">Dupla</option></select><input class="aslot" type="text" placeholder="nome(s) de quem apresenta"></div>
+    </article>
+
+    <article class="session" data-id="s05">
+      <div class="s-head"><span class="s-index">05</span><span class="s-date">30.06.2026</span><span class="s-bloco">Bloco III</span></div>
+      <h3 class="s-theme">Complexidade e ciência</h3>
+      <ul class="readings"><li><span class="au">Morin, Edgar.</span> <span class="ti">Introdução ao pensamento complexo.</span> Porto Alegre: Sulina, 1995.</li></ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup">Dupla</option></select><input class="aslot" type="text" placeholder="nome(s) de quem apresenta"></div>
+    </article>
+
+    <article class="session" data-id="s06">
+      <div class="s-head"><span class="s-index">06</span><span class="s-date">07.07.2026</span><span class="s-bloco">Bloco III</span></div>
+      <h3 class="s-theme">Crítica ao projeto moderno em Latour</h3>
+      <ul class="readings"><li><span class="au">Latour, Bruno.</span> <span class="ti">Jamais fomos modernos: ensaio de antropologia simétrica.</span> Rio de Janeiro: Editora 34, 1994.</li></ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup">Dupla</option></select><input class="aslot" type="text" placeholder="nome(s) de quem apresenta"></div>
+    </article>
+
+    <article class="session" data-id="s07">
+      <div class="s-head"><span class="s-index">07</span><span class="s-date">14.07.2026</span><span class="s-bloco">Bloco IV</span></div>
+      <h3 class="s-theme">Pós-colonialismos e novas epistemologias</h3>
+      <ul class="readings">
+        <li><span class="au">Lander, Edgardo.</span> Ciências sociais: saberes coloniais e eurocêntricos. In: <span class="ti">A colonialidade do saber: eurocentrismo e ciências sociais.</span> Buenos Aires: CLACSO, 2005.</li>
+        <li><span class="au">Quijano, Aníbal.</span> Colonialidade do poder, eurocentrismo e América Latina. In: <span class="ti">A colonialidade do saber: eurocentrismo e ciências sociais.</span> Buenos Aires: CLACSO, 2005.</li>
+        <li><span class="au">Santos, Boaventura de Sousa.</span> Para além do pensamento abissal: das linhas globais a uma ecologia de saberes. <span class="ti">Revista Crítica de Ciências Sociais,</span> n. 78, p. 3-46, 2007.</li>
+        <li><span class="au">Gonzalez, Lélia.</span> A categoria político-cultural de amefricanidade. <span class="ti">Tempo Brasileiro,</span> Rio de Janeiro, n. 92/93, p. 69-82, jan./jun. 1988.</li>
+      </ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup" selected>Dupla</option></select><input class="aslot" type="text" placeholder="nomes da dupla"></div>
+    </article>
+
+    <article class="session" data-id="s08">
+      <div class="s-head"><span class="s-index">08</span><span class="s-date">21.07.2026</span><span class="s-bloco">Bloco V</span></div>
+      <h3 class="s-theme">Gênero, ciência e interdisciplinaridade</h3>
+      <ul class="readings">
+        <li><span class="au">Butler, Judith.</span> <span class="ti">Problemas de gênero: feminismo e subversão da identidade.</span> Rio de Janeiro: Civilização Brasileira, 2008. p. 15-60.</li>
+        <li><span class="au">Machado, Lia Zanotta.</span> Gênero, um novo paradigma? <span class="ti">Cadernos Pagu,</span> Campinas, n. 11, p. 107-125, 1998.</li>
+        <li><span class="au">Soihet, Rachel; Costa, Suely Gomes.</span> Interdisciplinaridade: história das mulheres e estudos de gênero. <span class="ti">Gragoatá,</span> Niterói, n. 25, p. 29-49, 2008.</li>
+        <li><span class="au">Nucci, Marina Fisher.</span> Crítica feminista à ciência: das "feministas biólogas" ao caso das "neurofeministas". <span class="ti">Revista Estudos Feministas,</span> Florianópolis, v. 26, n. 1, 2018.</li>
+      </ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup" selected>Dupla</option></select><input class="aslot" type="text" placeholder="nomes da dupla"></div>
+    </article>
+
+    <article class="session" data-id="s09">
+      <div class="s-head"><span class="s-index">09</span><span class="s-date">04.08.2026</span><span class="s-bloco">Bloco V</span></div>
+      <h3 class="s-theme">Feminismo negro e interseccionalidade</h3>
+      <ul class="readings">
+        <li><span class="au">Crenshaw, Kimberlé.</span> Documento para o encontro de especialistas em aspectos da discriminação racial relativos ao gênero. <span class="ti">Revista Estudos Feministas,</span> v. 10, n. 1, p. 171-188, 2002.</li>
+        <li><span class="au">Figueiredo, Ângela.</span> Epistemologia insubmissa feminista negra decolonial. <span class="ti">Revista Tempo e Argumento,</span> v. 12, n. 29, 2020.</li>
+        <li><span class="au">Moutinho, Laura.</span> Diferenças e desigualdades negociadas: raça, sexualidade e gênero em produções acadêmicas recentes. <span class="ti">Cadernos Pagu,</span> n. 42, p. 201-248, 2014.</li>
+        <li><span class="au">Moura, Dione Oliveira; Almeida, Tânia Mara Campos de.</span> Ancestralidade, interseccionalidade, feminismo afrolatinoamericano e outras memórias sobre Lélia Gonzalez. <span class="ti">Arquivos do CMD,</span> v. 8, n. 2, 2019.</li>
+      </ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup" selected>Dupla</option></select><input class="aslot" type="text" placeholder="nomes da dupla"></div>
+    </article>
+
+    <article class="session" data-id="s10">
+      <div class="s-head"><span class="s-index">10</span><span class="s-date">11.08.2026</span><span class="s-bloco">Bloco V</span></div>
+      <h3 class="s-theme">Racismo e colonialismo</h3>
+      <ul class="readings">
+        <li><span class="au">Fanon, Frantz.</span> <span class="ti">Pele negra, máscaras brancas.</span> Salvador: EDUFBA, 2008. p. 1-51.</li>
+        <li><span class="au">Noguera, Renato.</span> Dos condenados da terra à necropolítica: diálogos filosóficos entre Frantz Fanon e Achille Mbembe. <span class="ti">Revista Latinoamericana do Colégio Internacional de Filosofia,</span> n. 3, 2018.</li>
+        <li><span class="au">Mbembe, Achille.</span> A universalidade de Frantz Fanon. (Prefácio de <span class="ti">Œuvres,</span> La Découverte), 2011.</li>
+        <li><span class="au">Mbembe, Achille.</span> Afropolitanismo. <span class="ti">Áskesis,</span> v. 4, n. 2, p. 68-71, 2015.</li>
+      </ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup" selected>Dupla</option></select><input class="aslot" type="text" placeholder="nomes da dupla"></div>
+    </article>
+
+    <article class="session" data-id="s11">
+      <div class="s-head"><span class="s-index">11</span><span class="s-date">18.08.2026</span><span class="s-bloco">Bloco V</span></div>
+      <h3 class="s-theme">Feminismo africano</h3>
+      <ul class="readings"><li><span class="au">Oyěwùmí, Oyèrónkẹ́.</span> <span class="ti">A invenção das mulheres: construindo um sentido africano para os discursos ocidentais de gênero.</span> Rio de Janeiro: Bazar do Tempo, 2021.</li></ul>
+      <div class="assign"><span class="albl">Seminário</span><select class="atype"><option value="">tipo…</option><option value="ind">Individual</option><option value="dup">Dupla</option></select><input class="aslot" type="text" placeholder="nome(s) de quem apresenta"></div>
+    </article>
+
+  </section>
+
+  <footer class="reveal" style="animation-delay:.3s">
+    <div class="mark">bons seminários</div>
+    <p>CHS-004 · 2026.2 · PPGCHS · Universidade Federal do ABC</p>
+    <div class="corr">
+      <strong>Nota sobre as referências</strong>
+      Algumas entradas foram normalizadas em relação ao plano original (grafia de nomes próprios, subtítulos e dados de publicação) para fins de citação. Confira a edição exata de cada texto com o docente antes do seminário, sobretudo a referência de Lélia Gonzalez sobre amefricanidade.
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY = "chs004-divisao-v1";
+  var sessions = Array.prototype.slice.call(document.querySelectorAll(".session[data-id]"));
+  var status = document.getElementById("save-status");
+  var storageOK = true;
+
+  function load(){
+    try{ return JSON.parse(localStorage.getItem(KEY) || "{}"); }
+    catch(e){ storageOK = false; return {}; }
+  }
+  function save(data){
+    try{ localStorage.setItem(KEY, JSON.stringify(data)); }
+    catch(e){ storageOK = false; if(status){ status.textContent = "Edição ativa (sem salvamento neste ambiente)."; } }
+  }
+
+  var data = load();
+
+  function recount(){
+    var dup=0, ind=0;
+    sessions.forEach(function(s){
+      var sel = s.querySelector(".atype");
+      var inp = s.querySelector(".aslot");
+      var hasName = inp && inp.value.trim().length>0;
+      var t = sel ? sel.value : "";
+      if(t==="dup" && hasName) dup++;
+      else if(t==="ind" && hasName) ind++;
+      if(hasName) s.classList.add("filled"); else s.classList.remove("filled");
+    });
+    document.getElementById("c-duplas").textContent = dup;
+    document.getElementById("c-indiv").textContent = ind;
+    document.getElementById("c-total").textContent = dup+ind;
+    document.getElementById("fn-duplas").classList.toggle("done", dup>=5);
+    document.getElementById("fn-indiv").classList.toggle("done", ind>=4);
+    document.getElementById("fn-total").classList.toggle("done", (dup+ind)>=9);
+  }
+
+  function persist(){
+    var out={};
+    sessions.forEach(function(s){
+      var id=s.getAttribute("data-id");
+      out[id]={ type:s.querySelector(".atype").value, names:s.querySelector(".aslot").value };
+    });
+    save(out);
+    recount();
+  }
+
+  sessions.forEach(function(s){
+    var id=s.getAttribute("data-id");
+    var sel=s.querySelector(".atype");
+    var inp=s.querySelector(".aslot");
+    if(data[id]){
+      if(data[id].type) sel.value=data[id].type;
+      if(data[id].names) inp.value=data[id].names;
+    }
+    sel.addEventListener("change", persist);
+    inp.addEventListener("input", persist);
+  });
+
+  if(!storageOK && status){ status.textContent = "Edição ativa (salvamento indisponível neste ambiente; funciona ao abrir o arquivo no navegador)."; }
+
+  document.getElementById("btn-clear").addEventListener("click", function(){
+    if(!confirm("Apagar todos os nomes e tipos preenchidos?")) return;
+    sessions.forEach(function(s){
+      s.querySelector(".atype").value="";
+      s.querySelector(".aslot").value="";
+    });
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    recount();
+  });
+
+  recount();
+})();
+</script>
+
+</body>
+</html>
