@@ -98,6 +98,11 @@ p.lead + p.lead{margin-top:16px;}
 .session.docled{border-left:3px solid var(--oxblood-soft);}
 .session.filled{border-left:3px solid var(--green-soft);}
 .session.opening{background:linear-gradient(180deg,rgba(124,45,42,.06),var(--paper-card));}
+.session.remoto{border-left:3px solid #4472c4;}
+.session.sem-aula{opacity:.55;pointer-events:none;}
+.s-badge{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;padding:3px 9px;border-radius:30px;font-weight:500;}
+.s-badge.remoto{color:#4472c4;background:rgba(68,114,196,.1);border:1px solid rgba(68,114,196,.28);}
+.s-badge.sem-aula{color:var(--ink-faint);background:rgba(125,110,87,.09);border:1px solid rgba(125,110,87,.22);}
 .s-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px;}
 .s-index{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;color:var(--oxblood);}
 .s-date{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--ink-faint);background:var(--paper-deep);padding:3px 10px;border-radius:3px;}
@@ -191,7 +196,7 @@ footer .corr strong{font-family:'IBM Plex Mono',monospace;font-size:.62rem;lette
     <p class="subtitle">Teoria social contemporânea, a questão do método e os caminhos da interdisciplinaridade</p>
     <dl class="meta">
       <div><dt>Docente</dt><dd>Paulo Sergio<br>da Costa Neves<small>CECS · paulo.neves@ufabc.edu.br</small></dd></div>
-      <div><dt>Encontros</dt><dd>Terças-feiras<small>26/05 a 18/08 de 2026</small></dd></div>
+      <div><dt>Encontros</dt><dd>Terças-feiras<small>26/05 a 25/08 de 2026</small></dd></div>
       <div><dt>Carga</dt><dd>48 horas-aula<small>12 encontros</small></dd></div>
       <div><dt>Turma</dt><dd><span id="qtdAlunos">14</span> discentes<small>Início: 26/05</small></dd></div>
     </dl>
@@ -211,14 +216,15 @@ footer .corr strong{font-family:'IBM Plex Mono',monospace;font-size:.62rem;lette
     <div class="sec-label">02 — Avaliação</div>
     <h2>Três frentes de avaliação</h2>
     <div class="eval-grid">
-      <div class="eval-card"><div class="num">A · 01</div><h3>Seminário</h3><p>Apresentação de um dos textos do programa, conduzindo a discussão do encontro.</p></div>
+      <div class="eval-card"><div class="num">A · 01</div><h3>Seminário</h3><p>Apresentação de um dos textos do programa, conduzindo a discussão do encontro. <strong>Inclui entrega de texto escrito</strong> sobre o(s) texto(s) apresentado(s) — ver nota abaixo.</p></div>
       <div class="eval-card"><div class="num">A · 02</div><h3>Participação</h3><p>Engajamento contínuo nas discussões em sala, sessão a sessão.</p></div>
       <div class="eval-card"><div class="num">A · 03</div><h3>Artigo / ensaio</h3><p>Texto em formato de artigo articulando interdisciplinaridade e a própria pesquisa.</p></div>
     </div>
+    <div class="alert" style="margin-top:18px;"><strong>Atenção · A·01 — entrega de texto escrito.</strong> Além da apresentação oral, cada discente (ou dupla/trio) deve enviar ao docente um texto escrito sobre o(s) texto(s) que apresentou no seminário. O envio deve ser feito por e-mail para <strong>paulo.neves@ufabc.edu.br</strong> em até <strong>7 dias após a data do encontro</strong>. O texto integra a avaliação de A·01 e sua ausência implica nota zero neste componente.</div>
     <div class="partida">
       <div class="pp-stamp">Atividade<small>da disciplina</small></div>
       <div class="pp-header">
-        <span class="pp-code">CHS-004 / A·03</span><span class="pp-dot">—</span><span>Trabalho final · ensaio</span><span class="pp-dot">—</span><span>Entrega: 18.08.2026</span>
+        <span class="pp-code">CHS-004 / A·03</span><span class="pp-dot">—</span><span>Trabalho final · ensaio</span><span class="pp-dot">—</span><span>Entrega: 25.08.2026</span>
       </div>
       <div class="pp-label">Ponto de partida</div>
       <p class="pp-title">Pergunta-guia do ensaio</p>
@@ -253,6 +259,7 @@ footer .corr strong{font-family:'IBM Plex Mono',monospace;font-size:.62rem;lette
   <section>
     <div class="sec-label">05 — Cronograma e bibliografia</div>
     <h2>Encontro a encontro</h2>
+    <div class="alert" style="margin-bottom:22px;"><strong>Alterações no calendário.</strong> A aula de <strong>21/07</strong> ocorrerá de forma <strong>remota</strong>, no mesmo horário habitual (link via Moodle). A aula de <strong>28/07 está suspensa</strong>. Como reposição, o semestre se estende até <strong>25/08/2026</strong>, que passa a ser também a nova data-limite de entrega do trabalho final.</div>
     <div id="cronograma"><p class="lead" style="opacity:.6">Carregando encontros…</p></div>
   </section>
 
@@ -326,7 +333,11 @@ function renderCronograma() {
   const aById = new Map(alunos.map(a=>[a.id,a]));
   document.getElementById('cronograma').innerHTML = encontros.map(e => {
     const ins = inscricoes.filter(i=>i.encontro_id===e.id);
-    const cls = e.conduzido_por_prof ? 'docled' : (ins.length>=e.max_inscritos && e.aceita_inscricao ? 'filled' : (e.numero==='Abertura' ? 'opening' : ''));
+    const isRemoto = e.data === '2026-07-21';
+    const isSemAula = e.data === '2026-07-28';
+    const baseClass = e.conduzido_por_prof ? 'docled' : (ins.length>=e.max_inscritos && e.aceita_inscricao ? 'filled' : (e.numero==='Abertura' ? 'opening' : ''));
+    const cls = [baseClass, isRemoto ? 'remoto' : '', isSemAula ? 'sem-aula' : ''].filter(Boolean).join(' ');
+    const modeBadge = isRemoto ? '<span class="s-badge remoto">Aula remota</span>' : (isSemAula ? '<span class="s-badge sem-aula">Sem aula · reposição 25/08</span>' : '');
     const readings = (e.leituras||[]).length === 0
       ? (e.nota ? `<p class="no-reading">${esc(e.nota)}</p>` : '')
       : `<ul class="readings">${e.leituras.map(L => L.apoio
@@ -347,10 +358,11 @@ function renderCronograma() {
       const btn = cheio ? '' : `<button class="join-btn" data-join="${e.id}">+ Entrar no grupo (${ins.length}/${e.max_inscritos})</button>`;
       assign = `<div class="assign"><span class="albl">Apresentação</span><div class="presenters">${chips || '<em style="color:var(--ink-faint);font-size:.92rem">Vaga livre — clique para entrar</em>'}</div>${btn}${tag}</div>`;
     }
+    if (isSemAula) assign = `<p class="no-reading">Encontro suspenso. Conteúdo reprogramado para <strong>25/08/2026</strong>.</p>`;
     const blocoChip = e.bloco ? `<span class="s-bloco">${esc(e.bloco)}</span>` : '';
     const idx = e.numero === 'Abertura' ? 'Abertura' : e.numero;
     return `<article class="session ${cls}">
-      <div class="s-head"><span class="s-index">${esc(idx)}</span><span class="s-date">${fmtLong(e.data)}</span>${blocoChip}</div>
+      <div class="s-head"><span class="s-index">${esc(idx)}</span><span class="s-date">${fmtLong(e.data)}</span>${modeBadge}${blocoChip}</div>
       <h3 class="s-theme">${esc(e.tema)}</h3>
       ${readings}
       ${assign}
